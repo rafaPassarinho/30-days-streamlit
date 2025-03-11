@@ -98,11 +98,7 @@ if coffee:
 if cola:
     st.write('Great! Here is some more 🥤')
 
-st.header('`streamlit_pandas_profiling`')
-df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/master/penguins_cleaned.csv')
 
-pr = df.profile_report()
-st_profile_report(pr)
 
 st.header('st.latex')
 st.latex(r'''
