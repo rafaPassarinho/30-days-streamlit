@@ -233,3 +233,36 @@ with col2:
 
 st.header('Output')
 st.write("st.session_state object:", st.session_state)
+
+st.title('🖼️ yt-img-app')
+st.header('YouTube Thumbnail Image Extractor App')
+
+with st.expander('ℹ️ About this app'):
+    st.write('This app extracts the thumbnail image of a YouTube video.')
+
+st.sidebar.header('Settings')
+img_dict = {
+    'Max': 'maxresdefault',
+    'High': 'hqdefault',
+    'Medium': 'mqdefault',
+    'Standard': 'sddefault',
+}
+selected_img_quality = st.sidebar.selectbox('Select image quality:', list(img_dict.keys()))
+img_quality = img_dict[selected_img_quality]
+
+yt_url = st.text_input('Enter YouTube video URL:', 'https://www.youtube.com/watch?v=Nrk8sqZfsgI')
+
+def get_ytid(input_url):
+    if 'youtu.be' in input_url:
+        ytid = input_url.split('/')[-1]
+    if 'youtube.com' in input_url:
+        ytid = input_url.split('v=')[-1].split('&')[0]
+    return ytid
+
+if yt_url != '':
+    ytid = get_ytid(yt_url)
+    img_url = f'https://img.youtube.com/vi/{ytid}/{img_quality}.jpg'
+    st.image(img_url)
+    st.write('YouTube Thumbnail Image URL:', img_url)
+else:
+    st.info('👆 Enter a YouTube video URL.')
